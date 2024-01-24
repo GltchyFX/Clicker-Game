@@ -9,6 +9,10 @@ body {
   background-color: #262344;
 }
 
+button {
+  color:#262344
+}
+
 .instructionHeader {
   color: aliceblue;
   margin-bottom: 50px;
