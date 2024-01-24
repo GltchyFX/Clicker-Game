@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 
 // eslint-disable-next-line react/prop-types
@@ -35,9 +35,35 @@ function UpgraderButton({price, onButtonClick}){
 }
 
 export default function App() {
-  const [clicks, setClicks] = useState(0);
-  const [CPC, setCPC] = useState(1);
-  const [upgradePrice, setUpgradePrice] = useState(100);
+  const [clicks, setClicks] = useState(() => {
+    const localClickValue = localStorage.getItem("CLICKS");
+    if(localClickValue == null){
+      return 0;
+    }
+    return JSON.parse(localClickValue);
+  });
+
+  const [CPC, setCPC] = useState(() => {
+    const localCPCValue = localStorage.getItem("CPC");
+    if(localCPCValue == null){
+      return 1;
+    }
+    return JSON.parse(localCPCValue);
+  });
+
+  const [upgradePrice, setUpgradePrice] = useState(() => {
+    const localPriceValue = localStorage.getItem("PRICE");
+    if(localPriceValue == null){
+      return 100;
+    }
+    return JSON.parse(localPriceValue);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("CLICKS", JSON.stringify(clicks));
+    localStorage.setItem("CPC", JSON.stringify(CPC));
+    localStorage.setItem("PRICE", JSON.stringify(upgradePrice));
+  }, [clicks, CPC, upgradePrice]);
 
   function clickHandler(){
     setClicks(clicks + CPC);
