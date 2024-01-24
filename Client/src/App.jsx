@@ -1,16 +1,49 @@
 import { useState } from 'react';
 import './App.css'
 
+// eslint-disable-next-line react/prop-types
+function ClickerButton({clicks, onButtonClick}){
+  return(
+    <div>
+       <button
+         className='clickButton'
+         onClick={onButtonClick}
+       >
+         Click Me
+      </button>
+      <h3
+        className='clicksHeader'
+      >
+        Clicks: {clicks}
+      </h3>
+    </div>
+  );
+}
+
+// eslint-disable-next-line react/prop-types
+function UpgraderButton({price, onButtonCLick}){
+  return(
+    <div>
+        <button
+          className='upgradeButton'
+          onClick={onButtonCLick}
+        >
+          x2 CpC: {price} Clicks
+        </button>
+      </div>
+  );
+}
+
 export default function App() {
   const [clicks, setClicks] = useState(0);
   const [CPC, setCPC] = useState(1);
   const [upgradePrice, setUpgradePrice] = useState(100);
 
-  function handleClicks(){
+  function clickHandler(){
     setClicks(clicks + CPC);
   }
 
-  function handleUpgrades(){
+  function upgradeHandler(){
     if(clicks >= upgradePrice){
       setClicks(clicks - upgradePrice);
       setCPC(CPC * 2);
@@ -27,27 +60,8 @@ export default function App() {
           Click the Button
         </h1>
       </div>
-      <div>
-        <button
-          className='clickButton'
-          onClick={handleClicks}
-        >
-          Click Me
-        </button>
-        <h3
-          className='clicksHeader'
-        >
-          Clicks: {clicks}
-        </h3>
-      </div>
-      <div>
-        <button
-          className='upgradeButton'
-          onClick={handleUpgrades}
-        >
-          x2 CpC: {upgradePrice} Clicks
-        </button>
-      </div>
+      <ClickerButton clicks={clicks} onButtonClick={() => clickHandler()} />
+      <UpgraderButton price={upgradePrice} onButtonCLick={() => upgradeHandler()}/>
     </>
   );
 }
