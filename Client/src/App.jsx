@@ -21,12 +21,12 @@ function ClickerButton({clicks, onButtonClick}){
 }
 
 // eslint-disable-next-line react/prop-types
-function UpgraderButton({price, onButtonCLick}){
+function UpgraderButton({price, onButtonClick}){
   return(
     <div>
         <button
           className='upgradeButton'
-          onClick={onButtonCLick}
+          onClick={onButtonClick}
         >
           x2 CpC: {price} Clicks
         </button>
@@ -61,7 +61,7 @@ export default function App() {
         </h1>
       </div>
       <ClickerButton clicks={clicks} onButtonClick={() => clickHandler()} />
-      <UpgraderButton price={upgradePrice} onButtonCLick={() => upgradeHandler()}/>
+      <UpgraderButton price={upgradePrice} onButtonClick={() => upgradeHandler()}/>
     </>
   );
 }
