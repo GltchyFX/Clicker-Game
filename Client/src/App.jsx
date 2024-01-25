@@ -34,6 +34,20 @@ function UpgraderButton({price, onButtonClick}){
   );
 }
 
+// eslint-disable-next-line react/prop-types
+function ResetButton({onButtonClick}){
+  return(
+    <div>
+        <button
+          className='resetButton'
+          onClick={onButtonClick}
+        >
+          RESET DATA
+        </button>
+      </div>
+  );
+}
+
 export default function App() {
   const [clicks, setClicks] = useState(() => {
     const localClickValue = localStorage.getItem("CLICKS");
@@ -77,8 +91,16 @@ export default function App() {
     }
   }
 
+  function resetData(){
+    setClicks(0);
+    setCPC(1);
+    setUpgradePrice(100);
+    localStorage.clear();
+  }
+
   return(
     <>
+      <ResetButton onButtonClick={() => resetData()}/>
       <div>
         <h1
           className='instructionHeader'
