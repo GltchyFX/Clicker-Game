@@ -5,11 +5,16 @@ import './App.css'
 function ClickerButton({clicks, onButtonClick}){
   return(
     <div>
-       <button
-         className='clickButton'
-         onClick={onButtonClick}
-       >
-         Click Me
+      <h1
+        className='instructionHeader'
+      >
+        Click the Button
+      </h1>
+      <button
+        className='clickButton'
+        onClick={onButtonClick}
+      >
+        Click Me
       </button>
       <h3
         className='clicksHeader'
@@ -24,13 +29,13 @@ function ClickerButton({clicks, onButtonClick}){
 function UpgraderButton({price, onButtonClick}){
   return(
     <div>
-        <button
-          className='upgradeButton'
-          onClick={onButtonClick}
-        >
-          x2 CpC: {price} Clicks
-        </button>
-      </div>
+      <button
+        className='upgradeButton'
+        onClick={onButtonClick}
+      >
+        x2 CpC: {price} Clicks
+      </button>
+    </div>
   );
 }
 
@@ -38,13 +43,13 @@ function UpgraderButton({price, onButtonClick}){
 function ResetButton({onButtonClick}){
   return(
     <div>
-        <button
-          className='resetButton'
-          onClick={onButtonClick}
-        >
-          RESET DATA
-        </button>
-      </div>
+      <button
+        className='resetButton'
+        onClick={onButtonClick}
+      >
+        RESET DATA
+      </button>
+    </div>
   );
 }
 
@@ -101,13 +106,6 @@ export default function App() {
   return(
     <>
       <ResetButton onButtonClick={() => resetData()}/>
-      <div>
-        <h1
-          className='instructionHeader'
-        >
-          Click the Button
-        </h1>
-      </div>
       <ClickerButton clicks={clicks} onButtonClick={() => clickHandler()} />
       <UpgraderButton price={upgradePrice} onButtonClick={() => upgradeHandler()}/>
     </>
