@@ -33,9 +33,18 @@ button {
   background-color: antiquewhite;
 }
 
+.upgradesUI {
+  max-width: 200px;
+  min-width: 200px;
+  margin: 1%;
+  /* position: absolute;
+  top: 0%;
+  right: 0%; */
+}
+
 .upgradeButton {
+  position: inherit;
   background-color: aliceblue;
-  margin-top: 15px;
 }
 
 .upgradeButton:hover {
