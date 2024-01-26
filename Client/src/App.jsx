@@ -1,50 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css'
-
-// eslint-disable-next-line react/prop-types
-function ClickerButton({clicks, onButtonClick}){
-  return(
-    <div>
-      <h1
-        className='instructionHeader'
-      >
-        Click the Button
-      </h1>
-      <button
-        className='clickButton'
-        onClick={onButtonClick}
-      >
-        Click Me
-      </button>
-      <h3
-        className='clicksHeader'
-      >
-        Clicks: {clicks}
-      </h3>
-    </div>
-  );
-}
-
-// eslint-disable-next-line react/prop-types
-function UpgraderButton({price, onButtonClick}){
-  return(
-    <div>
-      <button
-        className='upgradeButton'
-        onClick={onButtonClick}
-      >
-        x2 CpC: {price} Clicks
-      </button>
-    </div>
-  );
-}
+import MainInterface from './MainInterface';
+import UpgradesInterface from './UpgradesInterface';
 
 // eslint-disable-next-line react/prop-types
 function ResetButton({onButtonClick}){
   return(
     <div>
       <button
-        className='resetButton'
+        className='researchUI resetButton'
         onClick={onButtonClick}
       >
         RESET DATA
@@ -73,7 +37,7 @@ export default function App() {
   const [upgradePrice, setUpgradePrice] = useState(() => {
     const localPriceValue = localStorage.getItem("PRICE");
     if(localPriceValue == null){
-      return 100;
+      return [100, 250, 750, 3250, 10000];
     }
     return JSON.parse(localPriceValue);
   });
@@ -88,26 +52,47 @@ export default function App() {
     setClicks(clicks + CPC);
   }
 
-  function upgradeHandler(){
-    if(clicks >= upgradePrice){
-      setClicks(clicks - upgradePrice);
-      setCPC(CPC * 2);
-      setUpgradePrice((upgradePrice * 1.5).toFixed());
+  function upgradeHandler(id){
+    if(clicks >= upgradePrice[id]){
+      setClicks(clicks - upgradePrice[id]);
+      let priceArray = upgradePrice.slice();
+      switch(id){
+        case 0:
+          setCPC(CPC + 1);
+          priceArray[id] = (priceArray[id] * 1.15).toFixed();
+          break;
+        case 1:
+          setCPC(CPC + 5);
+          priceArray[id] = (priceArray[id] * 1.3).toFixed();
+          break;
+        case 2:
+          setCPC(CPC + 10);
+          priceArray[id] = (priceArray[id] * 1.5).toFixed();
+          break;
+        case 3:
+          setCPC(Number((CPC * 1.5).toFixed()));
+          priceArray[id] = (priceArray[id] * 1.95).toFixed();
+          break;
+        case 4:
+          setCPC(CPC * 2);
+          priceArray[id] = (priceArray[id] * 2.25).toFixed();
+      }
+      setUpgradePrice(priceArray);
     }
   }
 
   function resetData(){
     setClicks(0);
     setCPC(1);
-    setUpgradePrice(100);
+    setUpgradePrice([100, 250, 750, 3250, 10000]);
     localStorage.clear();
   }
 
   return(
     <>
       <ResetButton onButtonClick={() => resetData()}/>
-      <ClickerButton clicks={clicks} onButtonClick={() => clickHandler()} />
-      <UpgraderButton price={upgradePrice} onButtonClick={() => upgradeHandler()}/>
+      <MainInterface clicks={clicks} onButtonClick={() => clickHandler()} />
+      <UpgradesInterface price={upgradePrice} onButtonClick={upgradeHandler}/>
     </>
   );
 }
