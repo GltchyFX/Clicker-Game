@@ -3,7 +3,7 @@ export default function UpgradeButtons({id, CPCIncrement, price, onButtonClick})
   return(
     <div>
       <button
-        className='upgradesUI upgradeButton'
+        className='upgradeButton'
         id={id}
         onClick={onButtonClick}
         >

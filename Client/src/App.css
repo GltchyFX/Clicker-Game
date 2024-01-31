@@ -1,9 +1,16 @@
-#root {
+/*
+/ This is the most annoying thing I've ever done.
+/ I didn't think I'd have this much of a struggle with CSS.
+/ I started this project to learn React; it's transformed into learning CSS.
+/ I used to know how this worked but now I'm completely lost. 
+*/
+
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+} */
 
 body {
   background-color: #262344;
@@ -14,8 +21,19 @@ button {
   cursor: pointer;
 }
 
+.mainUI {
+  z-index: -0 !important;
+  position: relative;
+  left: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
 .instructionHeader {
   color: aliceblue;
+  margin-top: 25%;
   margin-bottom: 50px;
   text-shadow: 0px 0px 10px rgb(255, 0, 255);
 }
@@ -26,7 +44,8 @@ button {
 
 .clickButton {
   background-color: aliceblue;
-  margin-bottom: 15px;
+  padding-block: 2%;
+  margin-bottom: 6%;
 }
 
 .clickButton:hover {
@@ -34,16 +53,17 @@ button {
 }
 
 .upgradesUI {
-  max-width: 200px;
-  min-width: 200px;
-  margin: 1%;
-  /* position: absolute;
-  top: 0%;
-  right: 0%; */
+  z-index: 1 !important;
+  width: 200px;
+  display: block;
+  position: sticky;
+  margin-left: 256%;
+  bottom: 62%;
 }
 
 .upgradeButton {
-  position: inherit;
+  width: 200px;
+  margin: 1% auto;
   background-color: aliceblue;
 }
 
