@@ -1,20 +1,22 @@
 // eslint-disable-next-line react/prop-types
 export default function MainInterface({clicks, onButtonClick}){
   return(
-    <div>
+    <div
+      className='mainUI'
+    >
       <h1
-        className='mainUI instructionHeader'
+        className='instructionHeader'
       >
         Click the Button
       </h1>
       <button
-        className='mainUI clickButton'
+        className='clickButton'
         onClick={onButtonClick}
       >
         Click Me
       </button>
       <h3
-        className='mainUI clicksHeader'
+        className='clicksHeader'
       >
         Clicks: {clicks}
       </h3>

@@ -3,7 +3,9 @@ import UpgradeButtons from "./UpgradeButtons";
 // eslint-disable-next-line react/prop-types
 export default function UpgradesInterface({price, onButtonClick}){
   return(
-    <div>
+    <div
+      className='upgradesUI'
+    >
       <UpgradeButtons id={0} CPCIncrement={"+1"} price={price} onButtonClick={() => onButtonClick(0)} />
       <UpgradeButtons id={1} CPCIncrement={"+5"} price={price} onButtonClick={() => onButtonClick(1)}/>
       <UpgradeButtons id={2} CPCIncrement={"+10"} price={price} onButtonClick={() => onButtonClick(2)}/>
