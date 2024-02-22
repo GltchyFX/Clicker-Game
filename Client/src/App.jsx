@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import MainInterface from './MainInterface';
 import UpgradesInterface from './UpgradesInterface';
+import ResearchInterface from './ResearchInterface';
 
 // eslint-disable-next-line react/prop-types
 function ResetButton({onButtonClick}){
   return(
     <div>
       <button
-        className='researchUI resetButton'
+        className='resetButton'
         onClick={onButtonClick}
       >
         RESET DATA
@@ -42,11 +43,23 @@ export default function App() {
     return JSON.parse(localPriceValue);
   });
 
+  const[research, setResearch] = useState(() => {
+    const localResearchValue = localStorage.getItem("RESEARCH");
+    if(localResearchValue == null){
+      return Array(2).fill(false);
+    }
+    return JSON.parse(localResearchValue);
+  });
+
+  const researchPrices = [100000, 1000000];
+  const researchText = ["Almost Done!", "END!"];
+
   useEffect(() => {
     localStorage.setItem("CLICKS", JSON.stringify(clicks));
     localStorage.setItem("CPC", JSON.stringify(CPC));
     localStorage.setItem("PRICE", JSON.stringify(upgradePrice));
-  }, [clicks, CPC, upgradePrice]);
+    localStorage.setItem("RESEARCH", JSON.stringify(research));
+  }, [clicks, CPC, upgradePrice, research]);
 
   function clickHandler(){
     setClicks(clicks + CPC);
@@ -81,10 +94,24 @@ export default function App() {
     }
   }
 
+  function researchHandler(id){
+    // let researchArray = research.slice();
+    // if(id != 0 || researchArray[id - 1] == false){
+    //   return;
+    // }
+    // if(clicks >= researchPrices[id]){
+    //   setClicks(clicks - researchPrices[id]);
+    //   researchArray[id] = true;
+    //   setResearch(researchArray);
+    // }  
+    console.log("WIP" + id);
+  }
+
   function resetData(){
     setClicks(0);
     setCPC(1);
     setUpgradePrice([100, 250, 750, 3250, 10000]);
+    setResearch(Array(2).fill(false));
     localStorage.clear();
   }
 
@@ -93,6 +120,7 @@ export default function App() {
       <ResetButton onButtonClick={() => resetData()}/>
       <MainInterface clicks={clicks} onButtonClick={() => clickHandler()} />
       <UpgradesInterface price={upgradePrice} onButtonClick={upgradeHandler}/>
+      <ResearchInterface text={researchText} price={researchPrices} onButtonClick={researchHandler}/>
     </>
   );
 }
